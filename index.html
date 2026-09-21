@@ -793,6 +793,16 @@
     <section id="contact" class="section scrollspy full-height">
       <h3 class="page-title white-text teal">Contact</h3>
       <div class="container">
+        <div class="appearance-control" aria-labelledby="background-color-label">
+          <h5 id="background-color-label">Background Color</h5>
+          <label for="background-color-input">Enter a hex code</label>
+          <div class="appearance-control-row">
+            <input id="background-color-input" type="text" value="#e1f5fe" inputmode="text"
+              pattern="^#[0-9A-Fa-f]{6}$" maxlength="7" aria-describedby="background-color-message">
+            <button id="apply-background-color" class="btn waves-effect waves-light" type="button">Apply</button>
+          </div>
+          <p id="background-color-message" role="status" aria-live="polite"></p>
+        </div>
         <p>
           <a aria-label="Lorem ipsum" data-position="top" data-tooltip="Lorem ipsum"
             class="btn-floating btn-large waves-effect waves-light blue-grey tooltipped"><i class="fa fa-phone"></i><a
@@ -952,6 +962,38 @@
       renderProjects()
       document.getElementById("load-more-projects").addEventListener("click", function () {
         renderProjects()
+      })
+
+      var backgroundColorInput = document.getElementById("background-color-input")
+      var applyBackgroundColorButton = document.getElementById("apply-background-color")
+      var backgroundColorMessage = document.getElementById("background-color-message")
+      var savedBackgroundColor = localStorage.getItem("siteBackgroundColor")
+      var hexColorPattern = /^#[0-9A-Fa-f]{6}$/
+
+      function applyBackgroundColor() {
+        var color = backgroundColorInput.value.trim()
+
+        if (!hexColorPattern.test(color)) {
+          backgroundColorMessage.textContent = "Enter a valid hex code, such as #e1f5fe."
+          return
+        }
+
+        document.documentElement.style.setProperty("--site-background", color)
+        backgroundColorInput.value = color.toLowerCase()
+        localStorage.setItem("siteBackgroundColor", color.toLowerCase())
+        backgroundColorMessage.textContent = "Background color updated."
+      }
+
+      if (hexColorPattern.test(savedBackgroundColor || "")) {
+        backgroundColorInput.value = savedBackgroundColor
+        document.documentElement.style.setProperty("--site-background", savedBackgroundColor)
+      }
+
+      applyBackgroundColorButton.addEventListener("click", applyBackgroundColor)
+      backgroundColorInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          applyBackgroundColor()
+        }
       })
     })
   </script>
