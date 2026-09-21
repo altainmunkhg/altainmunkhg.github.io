@@ -901,8 +901,7 @@
       }
     ]
 
-    var projectsDisplayed = 0
-    var projectsPerLoad = 2
+    var projectsDisplayed = false
 
     function createProjectCard(project) {
       var details = project.details.map(function (detail) {
@@ -933,25 +932,29 @@
     function renderProjects(count) {
       var projectsList = document.getElementById("projects-list")
       var loadMoreButton = document.getElementById("load-more-projects")
-      var nextProjects = projects.slice(projectsDisplayed, projectsDisplayed + count)
+      var nextProjects
 
-      if (projectsDisplayed === 0) {
+      if (projectsDisplayed === false) {
         projectsList.innerHTML = ""
+        nextProjects = projects.slice(0, 2)
+      } else {
+        nextProjects = projects.slice(2)
       }
 
       projectsList.insertAdjacentHTML("beforeend", nextProjects.map(createProjectCard).join(""))
-      projectsDisplayed += nextProjects.length
 
-      if (projectsDisplayed >= projects.length) {
+      if (projectsDisplayed === true) {
         loadMoreButton.disabled = true
-        loadMoreButton.textContent = "All Projects Loaded"
+        loadMoreButton.textContent = "Projects Loaded"
+      } else {
+        projectsDisplayed = true
       }
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-      renderProjects(projectsPerLoad)
+      renderProjects()
       document.getElementById("load-more-projects").addEventListener("click", function () {
-        renderProjects(projectsPerLoad)
+        renderProjects()
       })
     })
   </script>
