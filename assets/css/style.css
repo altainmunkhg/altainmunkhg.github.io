@@ -179,7 +179,7 @@ nav i {
 } */
 
 main {
-  background: url(../../assets/img/bg.png) repeat;
+  background: var(--site-background) repeat;
   padding-left: 190px;
 }
 
