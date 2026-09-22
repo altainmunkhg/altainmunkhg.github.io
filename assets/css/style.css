@@ -334,6 +334,54 @@ h3 {
   padding: 0 10px;
 }
 
+:root {
+  --site-background: #e1f5fe;
+}
+
+.appearance-control {
+  background: rgba(255, 255, 255, 0.9);
+  border-left: 4px solid #0288d1;
+  margin-bottom: 30px;
+  max-width: 420px;
+  padding: 16px 20px;
+}
+
+.appearance-control h5 {
+  margin: 0 0 12px;
+}
+
+.appearance-control label {
+  color: #333;
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.appearance-control-row {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+
+.appearance-control input[type="text"] {
+  background: #fff;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  height: 36px;
+  margin: 0;
+  padding: 0 10px;
+}
+
+.appearance-control button {
+  flex-shrink: 0;
+}
+
+.appearance-control p {
+  color: #01579b;
+  font-size: 14px;
+  margin: 8px 0 0;
+}
+
 .overlay {
   background-color: rgba(0, 0, 0, 0.4);
   height: 100%;
